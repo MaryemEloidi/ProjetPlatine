@@ -21,11 +21,11 @@
             android:layout_marginBottom="8dp">
 
             <EditText
-                android:id="@+id/input_login"
+                android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Login"
-                android:inputType="text" />
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -59,4 +59,5 @@
             android:textSize="16dip"/>
 
     </LinearLayout>
+    
 </ScrollView>
