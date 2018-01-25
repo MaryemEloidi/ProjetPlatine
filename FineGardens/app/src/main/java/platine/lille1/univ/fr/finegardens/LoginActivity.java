@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.setMessage("Authenticating...");
                 progressDialog.show();
                         new android.os.Handler().postDelayed(new Runnable() {
-                            public void run() {
+                                public void run() {
 
                                 AuthenticationController.signinWithEmailAndPassword(email, password, LoginActivity.this, new OnCompleteListener<AuthResult>()
 
