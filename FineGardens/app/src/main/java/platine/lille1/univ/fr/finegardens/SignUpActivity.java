@@ -63,35 +63,35 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = passwordConfirmationEditText.getText().toString();
                 String passwordConfirmation = passwordConfirmationEditText.getText().toString();
 
-                if (lastname.isEmpty() || firstname.isEmpty() || mail.isEmpty() ||
-                        login.isEmpty() || password.isEmpty() || passwordConfirmation.isEmpty()) {
+                if (lastname.matches("") || firstname.matches("")
+                        || mail.matches("") || login.matches("")
+                        || password.matches("") || passwordConfirmation.matches("")) {
                     Toast.makeText(SignUpActivity.this, "Veuillez renseigner tous les champs", Toast.LENGTH_SHORT).show();
-                }
-
-                if (!password.equals(passwordConfirmation)) {
+                } else if (!password.equals(passwordConfirmation)) {
                     Toast.makeText(SignUpActivity.this, "Les deux mots de passe ne sont pas identiques", Toast.LENGTH_SHORT).show();
-                }
+                } else {
 
-                User user = new User(lastname, firstname, mail, login);
+                    User user = new User(lastname, firstname, mail, login);
 
-                mDatabase.child("Utilisateurs").child(mDatabase.push().getKey()).setValue(user);
+                    mDatabase.child("Utilisateurs").child(mDatabase.push().getKey()).setValue(user);
 
-                mAuth.createUserWithEmailAndPassword(user.getMail(), password)
-                        .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("SUCCESS : ", "createUserWithEmail:success");
-                                } else {
-                                    Log.w("ERROR : ", "createUserWithEmail:failure", task.getException());
+                    mAuth.createUserWithEmailAndPassword(user.getMail(), password)
+                            .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("SUCCESS : ", "createUserWithEmail:success");
+                                    } else {
+                                        Log.w("ERROR : ", "createUserWithEmail:failure", task.getException());
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                intent.putExtra("mail", user.getMail());
-                setResult(LoginActivity.RESULT_OK, intent);
-                finish();
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                    intent.putExtra("mail", user.getMail());
+                    setResult(LoginActivity.RESULT_OK, intent);
+                    finish();
+                }
             }
         });
 
