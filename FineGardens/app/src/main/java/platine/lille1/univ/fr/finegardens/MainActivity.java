@@ -1,5 +1,6 @@
 package platine.lille1.univ.fr.finegardens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
+import platine.lille1.univ.fr.finegardens.entities.Jardin;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,9 +65,11 @@ public class MainActivity extends AppCompatActivity
         mdatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String value = dataSnapshot.getValue(String.class);
-                mJardinsnames.add(value);
-                arrayAdapter.notifyDataSetChanged();
+               //Jardin jardin = dataSnapshot.getValue(Jardin.class);
+                //String jardinvalue = String.valueOf(jardin);
+
+                //mJardinsnames.add(jardinvalue);
+                //arrayAdapter.notifyDataSetChanged();
 
             }
 
@@ -135,6 +140,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_deja_visites) {
 
         } else if (id == R.id.nav_ajouter) {
+            Intent intent = new Intent(MainActivity.this, AjouterJardinActivity.class);
+            startActivity(intent);
+            finish();
 
         } else if (id == R.id.nav_liste_perso) {
 
