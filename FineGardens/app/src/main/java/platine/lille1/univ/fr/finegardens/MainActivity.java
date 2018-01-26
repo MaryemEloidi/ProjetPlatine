@@ -60,16 +60,16 @@ public class MainActivity extends AppCompatActivity
 
         ListView mListview = (ListView)findViewById(R.id.listview_jardins_list);
         DatabaseReference mdatabase = FirebaseDatabase.getInstance().getReference().child("Jardins");
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, mJardinsnames);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mJardinsnames);
         mListview.setAdapter(arrayAdapter);
         mdatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-               //Jardin jardin = dataSnapshot.getValue(Jardin.class);
-                //String jardinvalue = String.valueOf(jardin);
+               Jardin jardin = dataSnapshot.getValue(Jardin.class);
+                String jardinvalue = String.valueOf(jardin);
 
-                //mJardinsnames.add(jardinvalue);
-                //arrayAdapter.notifyDataSetChanged();
+                mJardinsnames.add(jardinvalue);
+                arrayAdapter.notifyDataSetChanged();
 
             }
 

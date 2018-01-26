@@ -14,6 +14,9 @@ public class Jardin {
     public String horaire_ouverture;
     public String horaire_fermeture;
     public float note;
+    public Jardin(){
+
+    }
     public Jardin(String id, String nom, String adresse, String description){
         this.id=id;
         this.nom = nom;
@@ -83,5 +86,10 @@ public class Jardin {
 
     public void setNote(float note) {
         this.note = note;
+    }
+
+    @Override
+    public String toString() {
+        return ""+ nom+ " "+ adresse;
     }
 }
