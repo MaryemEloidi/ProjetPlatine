@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String firstname = firstnameEditText.getText().toString();
                 String mail = mailEditText.getText().toString();
                 String login = loginEditText.getText().toString();
-                String password = passwordConfirmationEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
                 String passwordConfirmation = passwordConfirmationEditText.getText().toString();
 
                 if (lastname.matches("") || firstname.matches("")
