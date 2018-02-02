@@ -1,13 +1,16 @@
 package platine.lille1.univ.fr.finegardens;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.LatLngBounds;
 /**
@@ -40,11 +43,10 @@ public class MapActivity extends AppCompatActivity
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         LatLng lille = new LatLng(50.6397538, 3.0381042999999863);
         LatLng sydney = new LatLng(50.6373832, 3.1463655999999673);
         LatLng france = new LatLng(46.4892672, 2.7810699);
-
 
         googleMap.addMarker(new MarkerOptions().position(lille).title("Marker in lille"));
         googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -52,5 +54,20 @@ public class MapActivity extends AppCompatActivity
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(6.1f));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(france));
 
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(final Marker marker) {
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        googleMap.animateCamera(CameraUpdateFactory.
+                                newLatLngZoom(marker.getPosition(), 15f));
+                    }
+                }, 300);
+
+                return false;
+            }
+        });
     }
 }
