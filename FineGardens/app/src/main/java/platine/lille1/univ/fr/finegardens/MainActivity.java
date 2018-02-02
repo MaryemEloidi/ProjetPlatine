@@ -138,6 +138,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_coup_coeurs) {
 
         } else if (id == R.id.nav_deja_visites) {
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(intent);
+            finish();
 
         } else if (id == R.id.nav_ajouter) {
             Intent intent = new Intent(MainActivity.this, AjouterJardinActivity.class);
