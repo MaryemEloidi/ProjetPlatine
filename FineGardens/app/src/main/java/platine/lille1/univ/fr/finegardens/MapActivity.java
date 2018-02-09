@@ -88,7 +88,7 @@ public class MapActivity extends AppCompatActivity
                 googleMap.addMarker(new MarkerOptions()
                         .position(mLatlng)
                         .title(nomJardin)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.tree))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.tree_marker))
                 );
 
             }
