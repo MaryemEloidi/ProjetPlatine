@@ -9,8 +9,8 @@ public class Jardin {
     public String nom;
     public String adresse;
     public String description;
-    public double latitude;
-    public double longitude;
+    public long latitude;
+    public long longitude;
     public String horaire_ouverture;
     public String horaire_fermeture;
     public float note;
@@ -48,19 +48,19 @@ public class Jardin {
         this.description = description;
     }
 
-    public double getLatitude() {
+    public long getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(long latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public long getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(long longitude) {
         this.longitude = longitude;
     }
 
