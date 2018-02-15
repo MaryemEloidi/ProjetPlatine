@@ -8,11 +8,10 @@
     tools:context="platine.lille1.univ.fr.finegardens.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-    <ListView
-        android:id="@+id/listview_jardins_list"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+    <!--<ListView-->
+        <!--android:id="@+id/listview_jardins_list"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--tools:layout_editor_absoluteX="8dp"-->
+        <!--tools:layout_editor_absoluteY="8dp" />-->
 </android.support.constraint.ConstraintLayout>

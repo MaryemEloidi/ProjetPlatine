@@ -3,7 +3,6 @@ package platine.lille1.univ.fr.finegardens;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,13 +11,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.*;
 import com.google.android.gms.maps.model.*;
 
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
@@ -26,7 +23,7 @@ import platine.lille1.univ.fr.finegardens.entities.Jardin;
 /**
  * An activity that displays a Google map with a marker (pin) to indicate a particular location.
  */
-public class MapActivity extends AppCompatActivity
+public class MapActivity extends MainActivity
         implements OnMapReadyCallback {
     private GoogleMap mMap;
     private DatabaseReference mdatabase;

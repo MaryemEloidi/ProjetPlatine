@@ -77,9 +77,10 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                        R.style.AppTheme_NoActionBar);
+                        R.style.AppTheme_Custom_dialog);
+
                 progressDialog.setIndeterminate(true);
-                progressDialog.setMessage("Authenticating...");
+                progressDialog.setMessage("Authentification...");
                 progressDialog.show();
                         new android.os.Handler().postDelayed(new Runnable() {
                                 public void run() {
@@ -99,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                             }
                                         } else {
-                                            Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
