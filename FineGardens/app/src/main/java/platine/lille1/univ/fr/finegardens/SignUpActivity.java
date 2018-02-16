@@ -91,7 +91,6 @@ public class SignUpActivity extends AppCompatActivity {
                                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                                             .setDisplayName(login).build();
                                                     user.updateProfile(profileUpdates);
-                                                    Log.d("logiiiiiiiin :",user.getDisplayName());
                                                     //Intent intent = new Intent(l.this, nextActivity.class);
                                                    // startActivity(intent);
                                                 }
