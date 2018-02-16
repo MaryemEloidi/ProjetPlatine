@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,7 +46,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(final GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap) {
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Jardins");
 
         LatLng france = new LatLng(46.4892672, 2.7810699);
@@ -57,8 +58,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.addMarker(new MarkerOptions().position(lille).title("Marker in lille"));
         googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
 
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(6.1f));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(france));
+        mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(6.1f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(france));
         mdatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -71,15 +73,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 long latitude = jardin.getLatitude();
                 long longitude = jardin.getLongitude();
                 String nomJardin = jardin.getNom();
+                String description = jardin.getDescription();
 
 
                 // Create LatLng for each locations
                 LatLng mLatlng = new LatLng(latitude, longitude);
 
 
-                googleMap.addMarker(new MarkerOptions()
+                mMap.addMarker(new MarkerOptions()
                         .position(mLatlng)
-                        .title(nomJardin)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.tree_marker))
                 );
 
@@ -106,15 +108,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
                 new Handler().postDelayed(new Runnable() {
 
                     @Override
                     public void run() {
-                        googleMap.animateCamera(CameraUpdateFactory.
-                                newLatLngZoom(marker.getPosition(), 15f));
+                        mMap.animateCamera(CameraUpdateFactory.
+                                newLatLng(marker.getPosition()));
                     }
                 }, 300);
 
@@ -123,5 +125,5 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         });
 
     }
-    }
+}
 

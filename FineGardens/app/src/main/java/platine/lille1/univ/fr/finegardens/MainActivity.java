@@ -40,7 +40,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TestFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     ArrayList<String> mJardinsnames = new ArrayList<>();
     TextView login;
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity
             fragment = new AjouterJardinFragment();
 
         } else if (id == R.id.nav_liste_perso) {
-        fragment = new TestFragment();
+
         } else if (id == R.id.nav_share) {
 
         }else if (id == R.id.nav_send) {
@@ -203,10 +203,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-    @Override
-    public void onFragmentInteraction(Uri uri){
-
     }
 
 }
