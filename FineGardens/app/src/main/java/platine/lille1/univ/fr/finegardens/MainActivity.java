@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
 import platine.lille1.univ.fr.finegardens.fragments.AjouterJardinFragment;
+import platine.lille1.univ.fr.finegardens.fragments.DescriptionJardinFragment;
 import platine.lille1.univ.fr.finegardens.fragments.MapFragment;
 
 import android.support.v4.app.Fragment;
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_liste_perso) {
 
         } else if (id == R.id.nav_share) {
+            fragment = new DescriptionJardinFragment();
 
         }else if (id == R.id.nav_send) {
 
