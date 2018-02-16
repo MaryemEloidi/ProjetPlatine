@@ -1,9 +1,13 @@
 package platine.lille1.univ.fr.finegardens;
 
 import android.content.Intent;
+import android.icu.util.Freezable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,11 +29,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
+import platine.lille1.univ.fr.finegardens.fragments.AjouterJardinFragment;
+import platine.lille1.univ.fr.finegardens.fragments.MapFragment;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.widget.TextView;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TestFragment.OnFragmentInteractionListener {
 
     ArrayList<String> mJardinsnames = new ArrayList<>();
+    TextView login;
+    TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +52,17 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Fragment fragment = new AjouterJardinFragment();
+                FragmentManager fragmentManager  = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContent, fragment).commit();
+
             }
         });
 
@@ -56,6 +74,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+
+        login = (TextView)header.findViewById(R.id.login);
+        email = (TextView)header.findViewById(R.id.email);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            login.setText(user.getDisplayName());
+            Log.d(user.getDisplayName(),"logiiiiiiiin :");
+            email.setText(user.getEmail());
+        }
+        Fragment fragment = new MapFragment();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+
 
 
 //
@@ -132,6 +169,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Fragment fragment = null;
         int id = item.getItemId();
 
         if (id == R.id.nav_les_jardins) {
@@ -139,25 +177,36 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_coup_coeurs) {
 
         } else if (id == R.id.nav_deja_visites) {
-            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-            startActivity(intent);
-            finish();
-
+//            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+//            startActivity(intent);
+//            finish();
+        fragment = new MapFragment();
         } else if (id == R.id.nav_ajouter) {
-            Intent intent = new Intent(MainActivity.this, AjouterJardinActivity.class);
-            startActivity(intent);
-            finish();
+//            Intent intent = new Intent(MainActivity.this, AjouterJardinActivity.class);
+//            startActivity(intent);
+//            finish();
+            fragment = new AjouterJardinFragment();
 
         } else if (id == R.id.nav_liste_perso) {
-
+        fragment = new TestFragment();
         } else if (id == R.id.nav_share) {
 
         }else if (id == R.id.nav_send) {
 
+        }
+        if(fragment!= null ){
+            FragmentManager fragmentManager  = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.flContent, fragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    @Override
+    public void onFragmentInteraction(Uri uri){
+
+    }
+
 }

@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String lastname = lastnameEditText.getText().toString();
                 String firstname = firstnameEditText.getText().toString();
                 String mail = mailEditText.getText().toString();
-                String login = loginEditText.getText().toString();
+                final String login = loginEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String passwordConfirmation = passwordConfirmationEditText.getText().toString();
 
@@ -79,7 +80,23 @@ public class SignUpActivity extends AppCompatActivity {
                             .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
+
                                     if (task.isSuccessful()) {
+
+                                        FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+                                            @Override
+                                            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                                if(user!=null){
+                                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                            .setDisplayName(login).build();
+                                                    user.updateProfile(profileUpdates);
+                                                    Log.d("logiiiiiiiin :",user.getDisplayName());
+                                                    //Intent intent = new Intent(l.this, nextActivity.class);
+                                                   // startActivity(intent);
+                                                }
+                                            }
+                                        };
                                         Log.d("SUCCESS : ", "createUserWithEmail:success");
                                     } else {
                                         Log.w("ERROR : ", "createUserWithEmail:failure", task.getException());
@@ -87,14 +104,17 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             });
 
+
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     intent.putExtra("mail", user.getMail());
                     setResult(LoginActivity.RESULT_OK, intent);
                     finish();
                 }
+
             }
         });
 
     }
+
 
 }
