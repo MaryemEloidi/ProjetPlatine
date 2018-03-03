@@ -2,6 +2,7 @@ package platine.lille1.univ.fr.finegardens;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +40,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
     private TextView jardin_adresse;
     private TextView jardin_description;
     private DatabaseReference mdatabase;
+    private Button itiniraire;
 
 
 
@@ -48,11 +51,11 @@ public class DescriptionJardinActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         jardin_nom = findViewById(R.id.jardin_nom);
-        String jardinNom = getIntent().getStringExtra("JARDIN-NOM");
+        final String jardinNom = getIntent().getStringExtra("JARDIN-NOM");
         jardin_nom.setText(jardinNom);
         jardin_adresse = findViewById(R.id.jardin_adresse);
         jardin_description = findViewById(R.id.jardin_description);
-
+        itiniraire = findViewById(R.id.markerBTN);
 
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Jardins");
         mdatabase.orderByChild("nom")
@@ -102,6 +105,17 @@ public class DescriptionJardinActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.container, fragment);
                 fragmentTransaction.commit();
 
+            }
+        });
+        itiniraire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String adresseItiniraire = jardin_adresse.getText().toString();
+                adresseItiniraire.replaceAll(" ","+");
+
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("google.navigation:q="+jardinNom.replaceAll(" ","+")+","+adresseItiniraire));
+                startActivity(intent);
             }
         });
 
