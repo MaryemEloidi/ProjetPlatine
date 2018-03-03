@@ -1,8 +1,12 @@
 package platine.lille1.univ.fr.finegardens.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +25,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import platine.lille1.univ.fr.finegardens.DescriptionJardinActivity;
 import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * Created by cactus on 16/02/2018.
@@ -31,7 +38,9 @@ import platine.lille1.univ.fr.finegardens.entities.Jardin;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private DatabaseReference mdatabase;
-
+    public Jardin jardin;
+    public String nomJardin;
+    public String des;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,12 +59,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         LatLng france = new LatLng(46.4892672, 2.7810699);
 
-        /*LatLng lille = new LatLng(50.6397538, 3.0381042999999863);
-        LatLng sydney = new LatLng(50.6373832, 3.1463655999999673);
-        LatLng france = new LatLng(46.4892672, 2.7810699);
-
-        googleMap.addMarker(new MarkerOptions().position(lille).title("Marker in lille"));
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
 
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(6.1f));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(france));
@@ -63,25 +66,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                Jardin jardin = dataSnapshot.getValue(Jardin.class);
+                jardin = dataSnapshot.getValue(Jardin.class);
 
 
                 // Get recorded latitude and longitude
 
-                long latitude = jardin.getLatitude();
-                long longitude = jardin.getLongitude();
-                String nomJardin = jardin.getNom();
+                double latitude = jardin.getLatitude();
+                double longitude = jardin.getLongitude();
+                   nomJardin = jardin.getNom();
+
+                  des = jardin.getDescription();
+
 
 
                 // Create LatLng for each locations
                 LatLng mLatlng = new LatLng(latitude, longitude);
 
 
-                googleMap.addMarker(new MarkerOptions()
+                Marker m = googleMap.addMarker(new MarkerOptions()
                         .position(mLatlng)
                         .title(nomJardin)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.tree_marker))
+                        .snippet(des)
+
                 );
+                m.setTag(jardin);
 
             }
 
@@ -109,19 +118,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
-                new Handler().postDelayed(new Runnable() {
+                final String nom_jardin = marker.getTitle();
+                final String id_jardin = marker.getTag().toString();
+                final String des = marker.getSnippet();
 
-                    @Override
-                    public void run() {
-                        googleMap.animateCamera(CameraUpdateFactory.
-                                newLatLngZoom(marker.getPosition(), 15f));
-                    }
-                }, 300);
+               // new Handler().postDelayed(new Runnable() {
 
+                   // @Override
+                   // public void run() {
+                        Intent i = new Intent(getActivity().getBaseContext(),
+                                DescriptionJardinActivity.class);
+                        i.putExtra("JARDIN-NOM", nom_jardin);
+                        i.putExtra("JARDIN-ID", id_jardin);
+                       // i.putExtra("JARDIN-DESCRIPTION", des);
+
+                        startActivity(i);
+
+                   // }
+               /// }, 0);
                 return false;
             }
+
         });
 
     }
-    }
+}
 

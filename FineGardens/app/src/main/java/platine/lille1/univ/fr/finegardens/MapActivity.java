@@ -73,8 +73,8 @@ public class MapActivity extends MainActivity
 
                 // Get recorded latitude and longitude
 
-                long latitude = jardin.getLatitude();
-                long longitude = jardin.getLongitude();
+                double latitude = jardin.getLatitude();
+                double longitude = jardin.getLongitude();
                 String nomJardin = jardin.getNom();
 
 

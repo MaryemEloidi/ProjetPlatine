@@ -30,7 +30,9 @@ import java.util.ArrayList;
 
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
 import platine.lille1.univ.fr.finegardens.fragments.AjouterJardinFragment;
+import platine.lille1.univ.fr.finegardens.fragments.CommentsFragment;
 import platine.lille1.univ.fr.finegardens.fragments.DescriptionJardinFragment;
+import platine.lille1.univ.fr.finegardens.fragments.Fragment_profile;
 import platine.lille1.univ.fr.finegardens.fragments.MapFragment;
 
 import android.support.v4.app.Fragment;
@@ -41,7 +43,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TestFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     ArrayList<String> mJardinsnames = new ArrayList<>();
     TextView login;
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.replace(R.id.flContent, fragment).commit();
 
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -174,26 +176,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_les_jardins) {
-            // Handle the camera action
+            fragment = new MapFragment();
         } else if (id == R.id.nav_coup_coeurs) {
 
+
         } else if (id == R.id.nav_deja_visites) {
-//            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-//            startActivity(intent);
-//            finish();
-        fragment = new MapFragment();
+
+
         } else if (id == R.id.nav_ajouter) {
-//            Intent intent = new Intent(MainActivity.this, AjouterJardinActivity.class);
-//            startActivity(intent);
-//            finish();
+
             fragment = new AjouterJardinFragment();
 
         } else if (id == R.id.nav_liste_perso) {
-        fragment = new TestFragment();
         } else if (id == R.id.nav_share) {
-            fragment = new DescriptionJardinFragment();
 
         }else if (id == R.id.nav_send) {
+            fragment = new Fragment_profile();
 
         }
         if(fragment!= null ){
@@ -206,9 +204,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    @Override
-    public void onFragmentInteraction(Uri uri){
 
-    }
 
 }
