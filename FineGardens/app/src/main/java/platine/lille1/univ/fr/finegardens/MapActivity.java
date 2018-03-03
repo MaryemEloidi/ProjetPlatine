@@ -3,6 +3,8 @@ package platine.lille1.univ.fr.finegardens;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -61,9 +63,9 @@ public class MapActivity extends MainActivity
 
         googleMap.addMarker(new MarkerOptions().position(lille).title("Marker in lille"));
         googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
-
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(6.1f));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(france));
+        mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(6.1f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(france));
         mdatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -82,12 +84,14 @@ public class MapActivity extends MainActivity
                 LatLng mLatlng = new LatLng(latitude, longitude);
 
 
-                googleMap.addMarker(new MarkerOptions()
-                        .position(mLatlng)
-                        .title(nomJardin)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.tree_marker))
-                );
+                Marker m = googleMap.addMarker(new MarkerOptions()
+                                .position(mLatlng)
+                                .title(nomJardin)
+                                .snippet("Test de petit texte en dessous du titre du marqueur pour voir le rendu que ça donne")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.tree_marker))
+                            );
 
+                m.showInfoWindow();
             }
 
             @Override
@@ -111,19 +115,27 @@ public class MapActivity extends MainActivity
             }
         });
 
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
-                new Handler().postDelayed(new Runnable() {
+                Log.i("INFO", "Marqueur cliqué");
 
+                new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        googleMap.animateCamera(CameraUpdateFactory.
-                                newLatLngZoom(marker.getPosition(), 15f));
+                        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15f));
+                        Log.i("INFO", "Marqueur cliqué");
                     }
                 }, 300);
 
                 return false;
+            }
+        });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Toast.makeText(getApplicationContext(), "Info window clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
