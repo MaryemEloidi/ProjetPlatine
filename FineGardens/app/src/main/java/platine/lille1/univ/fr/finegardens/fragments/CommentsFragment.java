@@ -50,7 +50,7 @@ public class CommentsFragment extends Fragment {
     }
     public void displayComments(){
 
-        Query query = FirebaseDatabase.getInstance().getReference().child("Commentaire").orderByChild("jardinID").equalTo(jardinID).limitToFirst(1);
+        Query query = FirebaseDatabase.getInstance().getReference().child("Commentaire").orderByChild("jardinID").equalTo(jardinID);
         FirebaseListOptions<Comment> options = new FirebaseListOptions.Builder<Comment>()
                 .setQuery(query, Comment.class)
                 .setLayout(R.layout.commentlayout)
