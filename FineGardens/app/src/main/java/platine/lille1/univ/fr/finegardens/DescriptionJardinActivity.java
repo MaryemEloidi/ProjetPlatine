@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -36,6 +37,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import platine.lille1.univ.fr.finegardens.entities.Comment;
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
@@ -51,6 +54,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
     private DatabaseReference mdatabase;
     private Button itiniraire;
     private Button commentBTN;
+    private Button likeBTN;
 
 
 
@@ -69,6 +73,8 @@ public class DescriptionJardinActivity extends AppCompatActivity {
         noteAVGJardin();
         itiniraire = findViewById(R.id.markerBTN);
         commentBTN = findViewById(R.id.commentBTN);
+        likeBTN = findViewById(R.id.likeBTN);
+        isJardinFavorite();
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Jardins");
         mdatabase.orderByChild("nom")
                 .equalTo(jardinNom)
@@ -184,8 +190,61 @@ public class DescriptionJardinActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+        likeBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String currentUserID = FirebaseAuth.getInstance()
+                        .getCurrentUser().getUid();
+                final DatabaseReference ref = FirebaseDatabase.getInstance()
+                        .getReference().child("Utilisateurs").child(currentUserID).child("favoris");
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild(getIntent().getExtras().getString("JARDIN-ID"))){
+                           ref.child(getIntent().getExtras().getString("JARDIN-ID")).removeValue();
+                            likeBTN.setBackgroundResource(R.drawable.heart_icon);
+                        }
+                        else{
+                            ref.child(getIntent().getExtras().getString("JARDIN-ID")).setValue(true);
+                            likeBTN.setBackgroundResource(R.drawable.heart_plein);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //FirebaseDatabase.getInstance()
+                      //  .getReference().child("Utilisateurs").child(currentUserID).child("favoris").child(getIntent().getExtras().getString("JARDIN-ID")).setValue(true);
+            }
+        });
 
 
+    }
+    public void isJardinFavorite(){
+        String currentUserID = FirebaseAuth.getInstance()
+                .getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference().child("Utilisateurs").child(currentUserID).child("favoris").child(getIntent().getExtras().getString("JARDIN-ID"));
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Boolean isFav = dataSnapshot.getValue(Boolean.class);
+                if(isFav!=null && isFav){
+                    likeBTN.setBackgroundResource(R.drawable.heart_plein);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     //TODO a debeuguer !
