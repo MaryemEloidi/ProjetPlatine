@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (!task.isSuccessful()) {
                                             // there was an error
-                                            if (password.length() < 6) {
+                                            if (password.length() < 4) {
                                                 mPasswordView.setError("error minimum 6 lettres");
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "l'authentification a echoué", Toast.LENGTH_LONG).show();

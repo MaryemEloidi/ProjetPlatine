@@ -33,6 +33,7 @@ import platine.lille1.univ.fr.finegardens.fragments.AjouterJardinFragment;
 import platine.lille1.univ.fr.finegardens.fragments.CommentsFragment;
 import platine.lille1.univ.fr.finegardens.fragments.DescriptionJardinFragment;
 import platine.lille1.univ.fr.finegardens.fragments.Fragment_profile;
+import platine.lille1.univ.fr.finegardens.fragments.ListeFavorisFragment;
 import platine.lille1.univ.fr.finegardens.fragments.MapFragment;
 
 import android.support.v4.app.Fragment;
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_les_jardins) {
             fragment = new MapFragment();
         } else if (id == R.id.nav_coup_coeurs) {
-
+        fragment = new ListeFavorisFragment();
 
         } else if (id == R.id.nav_deja_visites) {
 

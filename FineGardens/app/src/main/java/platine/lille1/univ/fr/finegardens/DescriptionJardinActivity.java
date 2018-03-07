@@ -18,12 +18,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,6 +57,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
     private Button itiniraire;
     private Button commentBTN;
     private Button likeBTN;
+    private ImageView imageJardin;
 
 
 
@@ -69,6 +72,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
         jardin_nom.setText(jardinNom);
         jardin_adresse = findViewById(R.id.jardin_adresse);
         jardin_description = findViewById(R.id.jardin_description);
+        imageJardin = findViewById(R.id.image_jardin);
         jarind_rating = findViewById(R.id.jardin_rating_avg);
         noteAVGJardin();
         itiniraire = findViewById(R.id.markerBTN);
@@ -275,8 +279,13 @@ public class DescriptionJardinActivity extends AppCompatActivity {
     public void onJardinRetrieved(Jardin jardin){
         String description = jardin.getDescription();
         String adresse = jardin.getAdresse();
+        String urlImage = jardin.getImageUrl();
         jardin_description.setText(description);
         jardin_adresse.setText(adresse);
+
+        Glide.with(this)
+                .load(urlImage)
+                .into(imageJardin);
 
     }
     public void noteAVGJardin(){

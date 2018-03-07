@@ -14,6 +14,25 @@ public class Jardin {
     public String horaire_ouverture;
     public String horaire_fermeture;
     public float note;
+    public String imageUrl;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getId() {
+
+        return id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
     public Jardin(){
 
     }
