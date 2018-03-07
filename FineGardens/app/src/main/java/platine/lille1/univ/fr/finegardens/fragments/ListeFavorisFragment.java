@@ -61,7 +61,7 @@ public class ListeFavorisFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Jardin j = jardins.get(i);
-                
+
             }
         });
 
