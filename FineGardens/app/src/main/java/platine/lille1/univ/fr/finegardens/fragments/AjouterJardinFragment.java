@@ -3,13 +3,21 @@ import platine.lille1.univ.fr.finegardens.*;
 import platine.lille1.univ.fr.finegardens.Controller.JardinController;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.*;
 import android.os.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 
 /**
@@ -21,11 +29,22 @@ public class AjouterJardinFragment extends Fragment{
     private EditText mAdresseJardinView;
     private EditText mDescriptionView;
     private Button mBtnAjoutJardin;
+    double longitude;
+    double latitude;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        LocationManager lm = (LocationManager)getActivity().getSystemService(LOCATION_SERVICE);
+        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+             longitude = location.getLongitude();
+
+             latitude = location.getLatitude();
+
+        }
         return inflater.inflate(R.layout.activity_ajouter_jardin, container, false);
 
     }
@@ -36,6 +55,7 @@ public class AjouterJardinFragment extends Fragment{
         mAdresseJardinView = (EditText)getView().findViewById(R.id.input_adresse);
         mDescriptionView = (EditText)getView().findViewById(R.id.input_description);
         mBtnAjoutJardin = (Button)getView().findViewById(R.id.btn_ajouter);
+
         mBtnAjoutJardin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -63,7 +83,7 @@ public class AjouterJardinFragment extends Fragment{
                 progressDialog.show();
                 new android.os.Handler().postDelayed(new Runnable() {
                     public void run() {
-                        JardinController.ajouterJardin(nomJardin,adresseJardin,descriptionJardin);
+                        JardinController.ajouterJardin(nomJardin,adresseJardin,descriptionJardin,longitude,latitude);
                         progressDialog.dismiss();
                         Toast.makeText(getContext(), "Le jardin a été bien ajouté !", Toast.LENGTH_LONG).show();
 

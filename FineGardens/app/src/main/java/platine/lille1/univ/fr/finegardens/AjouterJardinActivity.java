@@ -1,6 +1,11 @@
 package platine.lille1.univ.fr.finegardens;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +22,8 @@ public class AjouterJardinActivity extends AppCompatActivity {
     private EditText mAdresseJardinView;
     private EditText mDescriptionView;
     private Button mBtnAjoutJardin;
+    private Double latitude;
+    private Double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,7 @@ public class AjouterJardinActivity extends AppCompatActivity {
         mAdresseJardinView = (EditText)findViewById(R.id.input_adresse);
         mDescriptionView = (EditText)findViewById(R.id.input_description);
         mBtnAjoutJardin = (Button)findViewById(R.id.btn_ajouter);
+
         mBtnAjoutJardin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -53,7 +61,7 @@ public class AjouterJardinActivity extends AppCompatActivity {
                 progressDialog.show();
                 new android.os.Handler().postDelayed(new Runnable() {
                     public void run() {
-                        JardinController.ajouterJardin(nomJardin,adresseJardin,descriptionJardin);
+                        JardinController.ajouterJardin(nomJardin,adresseJardin,descriptionJardin,longitude,latitude);
                         progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Le jardin a été bien ajouté !", Toast.LENGTH_LONG).show();
 

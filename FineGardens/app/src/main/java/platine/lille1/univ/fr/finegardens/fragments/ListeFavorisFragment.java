@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
+import platine.lille1.univ.fr.finegardens.JardinsListAdapter;
 import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Comment;
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
@@ -35,17 +37,17 @@ import platine.lille1.univ.fr.finegardens.entities.Note;
 
 public class ListeFavorisFragment extends Fragment {
     ArrayList<String> listJardinsID;
-    ArrayList<String> jardins;
+    ArrayList<Jardin> jardins;
     private FirebaseListAdapter<Jardin> adapter;
-    ArrayAdapter<String> adapterJardin;
+    ArrayAdapter<Jardin> adapterJardin;
     ListView listOfFavs;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View mView = inflater.inflate(R.layout.liste_favorislayout, container, false);
         listOfFavs = (ListView) mView.findViewById(R.id.favorisList);
-        jardins = new ArrayList<String>();
-        adapterJardin = new ArrayAdapter<String>(mView.getContext(), android.R.layout.simple_dropdown_item_1line, jardins);
+        jardins = new ArrayList<Jardin>();
+        adapterJardin = new JardinsListAdapter(mView.getContext(), jardins);
         listOfFavs.setAdapter(adapterJardin);
         return mView;
     }
@@ -54,6 +56,14 @@ public class ListeFavorisFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         listJardinsID = new ArrayList<String>();
         getListJardinID();
+
+        listOfFavs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Jardin j = jardins.get(i);
+                
+            }
+        });
 
     }
     public void getListJardinID(){
@@ -89,8 +99,7 @@ public class ListeFavorisFragment extends Fragment {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Jardin jardin = dataSnapshot.getValue(Jardin.class);
-                    String jardinNom = jardin.getNom();
-                    jardins.add(jardinNom);
+                    jardins.add(jardin);
                     adapterJardin.notifyDataSetChanged();
                 }
 
@@ -117,24 +126,6 @@ public class ListeFavorisFragment extends Fragment {
 
         }
 
-//        FirebaseListOptions<Jardin> options = new FirebaseListOptions.Builder<Jardin>()
-//                .setQuery(query, Jardin.class)
-//                .setLayout(R.layout.favoris_item_layout)
-//                .setLifecycleOwner(this)   //Added this
-//                .build();
-//        adapter = new FirebaseListAdapter<Jardin>(options) {
-//            @Override
-//            protected void populateView(View v, Jardin model, int position) {
-//                Log.d("populateView", model.getNom());
-//                TextView jardinTitle = (TextView) v.findViewById(R.id.title_jardin);
-//                TextView jardinAdresse = (TextView) v.findViewById(R.id.adresse_jardin);
-//                TextView jardinNote = (TextView) v.findViewById(R.id.note_jardin);
-//
-//                jardinTitle.setText(model.getNom());
-//                jardinAdresse.setText(model.getAdresse());
-//                jardinNote.setText(String.valueOf(model.getNote()));
-//            }
-//        };
     }
 
 }

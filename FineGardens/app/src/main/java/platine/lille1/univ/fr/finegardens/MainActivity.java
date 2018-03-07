@@ -181,18 +181,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_coup_coeurs) {
         fragment = new ListeFavorisFragment();
 
-        } else if (id == R.id.nav_deja_visites) {
-
-
-        } else if (id == R.id.nav_ajouter) {
+        }  else if (id == R.id.nav_ajouter) {
 
             fragment = new AjouterJardinFragment();
-
-        } else if (id == R.id.nav_liste_perso) {
-        } else if (id == R.id.nav_share) {
-
-        }else if (id == R.id.nav_send) {
-            fragment = new Fragment_profile();
 
         }
         if(fragment!= null ){

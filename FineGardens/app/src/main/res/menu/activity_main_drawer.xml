@@ -6,37 +6,20 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_les_jardins"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/home"
             android:title="Tous les jardins " />
         <item
             android:id="@+id/nav_coup_coeurs"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/heart_plein"
             android:title="Mes coup de coeurs" />
-        <item
-            android:id="@+id/nav_deja_visites"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Jardins déjà visités" />
+
         <item
             android:id="@+id/nav_ajouter"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/addjardin"
             android:title="Ajouter un jardin" />
-        <item
-            android:id="@+id/nav_liste_perso"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Créer une liste personnalisée" />
+
     </group>
 
-    <item android:title="">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Paramètres" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Profile" />
-        </menu>
-    </item>
+
 
 </menu>

@@ -68,7 +68,8 @@
         app:layout_constraintTop_toBottomOf="@id/password_confirmation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Créer"/>
+        android:text="Créer"
+        android:background="#bbd373"/>
 
 
 </android.support.constraint.ConstraintLayout>

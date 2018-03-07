@@ -309,6 +309,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
                 float noteAVG = sumNote/countNote;
                 Log.d("note AVG: ",""+noteAVG);
                 jarind_rating.setRating(noteAVG);
+                //TODO test si la note n'est pas nulle
                 DecimalFormat df = new DecimalFormat("#.0");
                 ratingText.setText(df.format(noteAVG));
 

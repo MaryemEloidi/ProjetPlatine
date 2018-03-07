@@ -1,12 +1,14 @@
 package platine.lille1.univ.fr.finegardens.fragments;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +26,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.gms.maps.GoogleMap.OnCameraIdleListener;
+import com.google.maps.android.clustering.ClusterManager;
+import com.google.android.gms.maps.GoogleMap.OnCameraIdleListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+
 
 import platine.lille1.univ.fr.finegardens.DescriptionJardinActivity;
+import platine.lille1.univ.fr.finegardens.Manifest;
+import platine.lille1.univ.fr.finegardens.MyItem;
 import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
 
@@ -43,6 +52,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public Jardin jardin;
     public String nomJardin;
     public String des;
+    private ClusterManager<MyItem> mClusterManager;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,18 +63,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
         return view;
     }
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Jardins");
+        mClusterManager = new ClusterManager<MyItem>(getContext(), googleMap);
 
         LatLng france = new LatLng(46.4892672, 2.7810699);
 
 
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(6.1f));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(france));
+        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
+        }
+       // googleMap.setOnCameraIdleListener(mClusterManager);
+       // googleMap.setOnMarkerClickListener(mClusterManager);
         mdatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -83,7 +102,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 // Create LatLng for each locations
                 LatLng mLatlng = new LatLng(latitude, longitude);
 
-
                 Marker m = googleMap.addMarker(new MarkerOptions()
                         .position(mLatlng)
                         .title(nomJardin)
@@ -91,7 +109,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         .snippet(des)
 
                 );
+
+                //MyItem offsetItem = new MyItem(latitude, longitude,nomJardin,des,jardin);
+               //mClusterManager.addItem(offsetItem);
+
                 m.setTag(jardin);
+
 
             }
 
@@ -116,6 +139,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        /*ClusterManager.OnClusterItemClickListener<MyItem> mClusterItemClickListener = new ClusterManager.OnClusterItemClickListener<MyItem>() {
+
+            @Override
+            public boolean onClusterItemClick(MyItem item) {
+                final String nom_jardin = item.getTitle();
+                final String id_jardin = item.getTag().toString();
+                final String des = item.getSnippet();
+
+                Intent i = new Intent(getActivity().getBaseContext(),
+                        DescriptionJardinActivity.class);
+                i.putExtra("JARDIN-NOM", nom_jardin);
+                i.putExtra("JARDIN-ID", id_jardin);
+
+                startActivity(i);
+                return false;
+            }
+        };
+        mClusterManager.setOnClusterItemClickListener(mClusterItemClickListener);
+*/
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
@@ -123,25 +165,32 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 final String id_jardin = marker.getTag().toString();
                 final String des = marker.getSnippet();
 
-               // new Handler().postDelayed(new Runnable() {
-
-                   // @Override
-                   // public void run() {
                         Intent i = new Intent(getActivity().getBaseContext(),
                                 DescriptionJardinActivity.class);
                         i.putExtra("JARDIN-NOM", nom_jardin);
                         i.putExtra("JARDIN-ID", id_jardin);
-                       // i.putExtra("JARDIN-DESCRIPTION", des);
 
                         startActivity(i);
-
-                   // }
-               /// }, 0);
                 return false;
             }
 
         });
 
     }
+    /*private void addItems() {
+
+        // Set some lat/lng coordinates to start with.
+        double lat = 46.4892672;
+        double lng = 2.7810699;
+
+        // Add ten cluster items in close proximity, for purposes of this example.
+        for (int i = 0; i < 10; i++) {
+            double offset = i / 60d;
+            lat = lat + offset;
+            lng = lng + offset;
+            MyItem offsetItem = new MyItem(lat, lng);
+            mClusterManager.addItem(offsetItem);
+        }
+    }*/
 }
 

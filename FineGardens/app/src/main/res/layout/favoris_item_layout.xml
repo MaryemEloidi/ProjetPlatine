@@ -2,26 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
+    android:padding="8dp">
+    <LinearLayout android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip">
+    <ImageView
+        android:id="@+id/image_jardin_LIST"
+        android:layout_width="70dip"
+        android:layout_height="70dip" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="titre"
-        android:textSize="25dp"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textSize="22dp"
+        android:layout_margin="20dp"
+        android:paddingLeft="35dp"
         android:id="@+id/title_jardin"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="adresse"
-        android:textSize="18dp"
-        android:id="@+id/adresse_jardin"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="note"
-        android:textSize="18dp"
-        android:id="@+id/note_jardin"/>
+
     </LinearLayout>
