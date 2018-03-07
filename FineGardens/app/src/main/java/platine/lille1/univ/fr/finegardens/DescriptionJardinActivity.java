@@ -38,6 +38,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.security.PublicKey;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +59,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
     private Button commentBTN;
     private Button likeBTN;
     private ImageView imageJardin;
+    private TextView ratingText;
 
 
 
@@ -74,6 +76,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
         jardin_description = findViewById(R.id.jardin_description);
         imageJardin = findViewById(R.id.image_jardin);
         jarind_rating = findViewById(R.id.jardin_rating_avg);
+        ratingText = findViewById(R.id.ratingTv);
         noteAVGJardin();
         itiniraire = findViewById(R.id.markerBTN);
         commentBTN = findViewById(R.id.commentBTN);
@@ -306,6 +309,8 @@ public class DescriptionJardinActivity extends AppCompatActivity {
                 float noteAVG = sumNote/countNote;
                 Log.d("note AVG: ",""+noteAVG);
                 jarind_rating.setRating(noteAVG);
+                DecimalFormat df = new DecimalFormat("#.0");
+                ratingText.setText(df.format(noteAVG));
 
             }
             @Override
