@@ -6,23 +6,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_les_jardins"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_map_black_18dp"
             android:title="Tous les jardins " />
         <item
             android:id="@+id/nav_coup_coeurs"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_favorite_black_18dp"
             android:title="Mes coup de coeurs" />
         <item
             android:id="@+id/nav_deja_visites"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_visibility_black_18dp"
             android:title="Jardins déjà visités" />
         <item
             android:id="@+id/nav_ajouter"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_add_circle_outline_black_18dp"
             android:title="Ajouter un jardin" />
         <item
             android:id="@+id/nav_liste_perso"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_playlist_add_black_18dp"
             android:title="Créer une liste personnalisée" />
     </group>
 
@@ -30,11 +30,11 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_settings_black_18dp"
                 android:title="Paramètres" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_perm_identity_black_18dp"
                 android:title="Profile" />
         </menu>
     </item>
