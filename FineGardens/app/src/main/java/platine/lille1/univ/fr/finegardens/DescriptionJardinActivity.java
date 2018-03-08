@@ -306,13 +306,14 @@ public class DescriptionJardinActivity extends AppCompatActivity {
                     countNote++;
                     Log.d("Note",String.valueOf(n.getRating()));
                 }
-                float noteAVG = sumNote/countNote;
-                Log.d("note AVG: ",""+noteAVG);
-                jarind_rating.setRating(noteAVG);
-                //TODO test si la note n'est pas nulle
-                DecimalFormat df = new DecimalFormat("#.0");
-                ratingText.setText(df.format(noteAVG));
-
+                if(countNote>0 && sumNote>0) {
+                    float noteAVG = sumNote / countNote;
+                    Log.d("note AVG: ", "" + noteAVG);
+                    jarind_rating.setRating(noteAVG);
+                    //TODO test si la note n'est pas nulle
+                    DecimalFormat df = new DecimalFormat("#.0");
+                    ratingText.setText(df.format(noteAVG));
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
