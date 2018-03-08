@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_les_jardins"
-            android:icon="@drawable/home"
+            android:icon="@drawable/ic_map_black_18dp"
             android:title="Tous les jardins " />
         <item
             android:id="@+id/nav_coup_coeurs"
@@ -15,7 +15,7 @@
 
         <item
             android:id="@+id/nav_ajouter"
-            android:icon="@drawable/addjardin"
+            android:icon="@drawable/ic_add_circle_outline_black_18dp"
             android:title="Ajouter un jardin" />
 
     </group>
