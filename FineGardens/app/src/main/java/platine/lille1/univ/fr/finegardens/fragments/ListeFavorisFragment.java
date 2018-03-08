@@ -1,5 +1,6 @@
 package platine.lille1.univ.fr.finegardens.fragments;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
+import platine.lille1.univ.fr.finegardens.DescriptionJardinActivity;
 import platine.lille1.univ.fr.finegardens.JardinsListAdapter;
 import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Comment;
@@ -61,6 +63,16 @@ public class ListeFavorisFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Jardin j = jardins.get(i);
+                final String nom_jardin = j.getNom();
+                final String id_jardin = j.getAdresse();
+                final String des = j.getDescription();
+
+                Intent intent = new Intent(getActivity().getBaseContext(),
+                        DescriptionJardinActivity.class);
+                intent.putExtra("JARDIN-NOM", nom_jardin);
+                intent.putExtra("JARDIN-ID", id_jardin);
+
+                startActivity(intent);
 
             }
         });
