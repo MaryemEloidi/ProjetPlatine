@@ -42,6 +42,7 @@
             android:name=".MapActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DescriptionJardinActivity"></activity>
+        <activity android:name=".CommentsActivity"></activity>
     </application>
 
 </manifest>

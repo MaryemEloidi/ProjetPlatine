@@ -119,16 +119,21 @@ public class DescriptionJardinActivity extends AppCompatActivity {
         commentslink.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                CommentsFragment fragment = new CommentsFragment();
-                Bundle args = new Bundle();
-                args.putString("JARDIN-ID", getIntent().getExtras().getString("JARDIN-ID"));
-                fragment.setArguments(args);
 
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction =
-                        fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
-                fragmentTransaction.commit();
+                Intent i = new Intent(DescriptionJardinActivity.this,
+                        CommentsActivity.class);
+                i.putExtra("JARDIN-ID", getIntent().getExtras().getString("JARDIN-ID"));
+                startActivity(i);
+//                CommentsFragment fragment = new CommentsFragment();
+//                Bundle args = new Bundle();
+//                args.putString("JARDIN-ID", getIntent().getExtras().getString("JARDIN-ID"));
+//                fragment.setArguments(args);
+//
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction =
+//                        fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container, fragment);
+//                fragmentTransaction.commit();
 
             }
         });
