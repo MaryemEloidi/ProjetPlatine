@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="platine.lille1.univ.fr.finegardens.DescriptionJardinActivity">
+    tools:context="platine.lille1.univ.fr.finegardens.activities.DescriptionJardinActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

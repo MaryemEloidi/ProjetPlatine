@@ -24,25 +24,21 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoginActivity">
+            android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AjouterJardinActivity" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".activities.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MapActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DescriptionJardinActivity"></activity>
-        <activity android:name=".CommentsActivity"></activity>
+        <activity android:name=".activities.DescriptionJardinActivity"></activity>
+        <activity android:name=".activities.CommentsActivity"></activity>
     </application>
 
 </manifest>

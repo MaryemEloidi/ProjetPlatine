@@ -1,11 +1,6 @@
-package platine.lille1.univ.fr.finegardens;
+package platine.lille1.univ.fr.finegardens.activities;
 
-import android.content.Intent;
-import android.icu.util.Freezable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -17,22 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import platine.lille1.univ.fr.finegardens.entities.Jardin;
+import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.fragments.AjouterJardinFragment;
-import platine.lille1.univ.fr.finegardens.fragments.CommentsFragment;
-import platine.lille1.univ.fr.finegardens.fragments.DescriptionJardinFragment;
-import platine.lille1.univ.fr.finegardens.fragments.Fragment_profile;
 import platine.lille1.univ.fr.finegardens.fragments.ListeFavorisFragment;
 import platine.lille1.univ.fr.finegardens.fragments.MapFragment;
 

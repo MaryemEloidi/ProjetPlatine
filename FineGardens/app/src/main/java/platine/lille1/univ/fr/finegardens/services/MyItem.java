@@ -1,4 +1,4 @@
-package platine.lille1.univ.fr.finegardens;
+package platine.lille1.univ.fr.finegardens.services;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;

@@ -1,4 +1,4 @@
-package platine.lille1.univ.fr.finegardens;
+package platine.lille1.univ.fr.finegardens.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
+import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Comment;
 
 

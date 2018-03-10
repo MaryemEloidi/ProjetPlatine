@@ -1,10 +1,8 @@
-package platine.lille1.univ.fr.finegardens;
+package platine.lille1.univ.fr.finegardens.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +20,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.User;
 
 public class SignUpActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package platine.lille1.univ.fr.finegardens;
+package platine.lille1.univ.fr.finegardens.activities;
 
 
 import android.app.Activity;
@@ -21,9 +21,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import platine.lille1.univ.fr.finegardens.Controller.AuthenticationController;
+import platine.lille1.univ.fr.finegardens.R;
 
 
 /**

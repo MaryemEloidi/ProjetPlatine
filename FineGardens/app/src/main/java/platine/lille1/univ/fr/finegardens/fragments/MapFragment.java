@@ -3,10 +3,7 @@ package platine.lille1.univ.fr.finegardens.fragments;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -26,15 +23,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.android.gms.maps.GoogleMap.OnCameraIdleListener;
 import com.google.maps.android.clustering.ClusterManager;
-import com.google.android.gms.maps.GoogleMap.OnCameraIdleListener;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
 
-import platine.lille1.univ.fr.finegardens.DescriptionJardinActivity;
-import platine.lille1.univ.fr.finegardens.Manifest;
-import platine.lille1.univ.fr.finegardens.MyItem;
+import platine.lille1.univ.fr.finegardens.activities.DescriptionJardinActivity;
+import platine.lille1.univ.fr.finegardens.services.MyItem;
 import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
 

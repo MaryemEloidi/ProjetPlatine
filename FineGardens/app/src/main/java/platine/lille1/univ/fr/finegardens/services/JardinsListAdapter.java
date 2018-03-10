@@ -1,4 +1,4 @@
-package platine.lille1.univ.fr.finegardens;
+package platine.lille1.univ.fr.finegardens.services;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
 
 /**
