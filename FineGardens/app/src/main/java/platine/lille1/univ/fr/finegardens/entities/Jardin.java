@@ -36,13 +36,14 @@ public class Jardin {
     public Jardin(){
 
     }
-    public Jardin(String id, String nom, String adresse, String description, double longitude, double latitude){
+    public Jardin(String id, String nom, String adresse, String description, double longitude, double latitude, String imageUrl){
         this.id=id;
         this.nom = nom;
         this.adresse = adresse;
         this.description = description;
         this.latitude = latitude;
         this.longitude =longitude;
+        this.imageUrl = imageUrl;
     }
 
     public String getNom() {

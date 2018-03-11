@@ -17,10 +17,10 @@ import platine.lille1.univ.fr.finegardens.entities.Jardin;
 public class JardinController {
     private static final FirebaseAuth auth = FirebaseAuth.getInstance();
     private static final DatabaseReference mdatabase = FirebaseDatabase.getInstance().getReference();
-    public  static void ajouterJardin(String nom, String adresse, String description, double longitude, double latitude){
+    public  static void ajouterJardin(String nom, String adresse, String description, double longitude, double latitude, String imageUrl){
         String jardinID = mdatabase.push().getKey();
 
-        Jardin jardin = new Jardin(jardinID,nom,adresse,description,longitude,latitude);
+        Jardin jardin = new Jardin(jardinID,nom,adresse,description,longitude,latitude,imageUrl);
         mdatabase.child("Jardins").child(jardinID).setValue(jardin);
 
     }

@@ -23,7 +23,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:layout_gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:hint="Donner votre avis" />
 
     <RatingBar

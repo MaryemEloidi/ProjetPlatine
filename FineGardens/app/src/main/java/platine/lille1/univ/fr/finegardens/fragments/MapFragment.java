@@ -76,6 +76,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
        // googleMap.setOnCameraIdleListener(mClusterManager);
        // googleMap.setOnMarkerClickListener(mClusterManager);
+
         mdatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -99,7 +100,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         .position(mLatlng)
                         .title(nomJardin)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.tree_marker))
-                        .snippet(des)
 
                 );
 
@@ -150,23 +150,39 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         };
         mClusterManager.setOnClusterItemClickListener(mClusterItemClickListener);
+
 */
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(final Marker marker) {
+//                final String nom_jardin = marker.getTitle();
+//                final String id_jardin = marker.getTag().toString();
+//                final String des = marker.getSnippet();
+//
+//                        Intent i = new Intent(getActivity().getBaseContext(),
+//                                DescriptionJardinActivity.class);
+//                        i.putExtra("JARDIN-NOM", nom_jardin);
+//                        i.putExtra("JARDIN-ID", id_jardin);
+//
+//                        startActivity(i);
+//                return false;
+//            }
+//
+//        });
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
-            public boolean onMarkerClick(final Marker marker) {
+            public void onInfoWindowClick(Marker marker) {
                 final String nom_jardin = marker.getTitle();
                 final String id_jardin = marker.getTag().toString();
                 final String des = marker.getSnippet();
 
-                        Intent i = new Intent(getActivity().getBaseContext(),
-                                DescriptionJardinActivity.class);
-                        i.putExtra("JARDIN-NOM", nom_jardin);
-                        i.putExtra("JARDIN-ID", id_jardin);
+                Intent i = new Intent(getActivity().getBaseContext(),
+                        DescriptionJardinActivity.class);
+                i.putExtra("JARDIN-NOM", nom_jardin);
+                i.putExtra("JARDIN-ID", id_jardin);
 
-                        startActivity(i);
-                return false;
+                startActivity(i);
             }
-
         });
 
     }
