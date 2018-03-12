@@ -302,6 +302,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
                     //TODO test si la note n'est pas nulle
                     DecimalFormat df = new DecimalFormat("#.0");
                     ratingText.setText(df.format(noteAVG));
+
                 }
             }
             @Override

@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_les_jardins"
             android:icon="@drawable/ic_map_black_48dp"
-            android:title="Tous les jardins " />
+            android:title="Carte des jardins " />
         <item
             android:id="@+id/nav_coup_coeurs"
             android:icon="@drawable/heart_plein"
@@ -17,6 +17,10 @@
             android:id="@+id/nav_ajouter"
             android:icon="@drawable/ic_add_circle_outline_black_48dp"
             android:title="Ajouter un jardin" />
+        <item
+            android:id="@+id/list_jardins"
+            android:icon="@drawable/ic_add_circle_outline_black_48dp"
+            android:title="liste des jardins" />
 
     </group>
 

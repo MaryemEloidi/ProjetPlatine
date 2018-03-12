@@ -58,7 +58,7 @@ public class ListeFavorisFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Jardin j = jardins.get(i);
                 final String nom_jardin = j.getNom();
-                final String id_jardin = j.getAdresse();
+                final String id_jardin = j.getId();
                 final String des = j.getDescription();
 
                 Intent intent = new Intent(getActivity().getBaseContext(),

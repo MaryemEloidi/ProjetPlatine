@@ -3,9 +3,13 @@ package platine.lille1.univ.fr.finegardens.fragments;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +34,7 @@ import platine.lille1.univ.fr.finegardens.activities.DescriptionJardinActivity;
 import platine.lille1.univ.fr.finegardens.services.MyItem;
 import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.entities.Jardin;
+import platine.lille1.univ.fr.finegardens.services.PagerAdapter;
 
 
 import static java.lang.Integer.parseInt;
@@ -46,6 +51,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public String nomJardin;
     public String des;
     private ClusterManager<MyItem> mClusterManager;
+    private FragmentActivity myContext;
+
 
 
     @Override

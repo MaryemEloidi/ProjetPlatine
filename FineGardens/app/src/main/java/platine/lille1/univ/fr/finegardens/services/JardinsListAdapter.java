@@ -44,9 +44,13 @@ public class JardinsListAdapter extends ArrayAdapter<Jardin> {
         }
         TextView titre = (TextView) view.findViewById(R.id.title_jardin);
         ImageView imageView = (ImageView) view.findViewById(R.id.image_jardin_LIST);
+        TextView rating = (TextView) view.findViewById(R.id.rating);
+        TextView adresse = (TextView) view.findViewById(R.id.jardin_adresse);
 
         // ViewHolder holder = (ViewHolder) view.getTag();
         titre.setText(list.get(position).getNom());
+        rating.setText("Note: "+String.valueOf(list.get(position).getNote()));
+        adresse.setText(list.get(position).getAdresse());
         Glide.with(getContext())
                 .load(list.get(position).getImageUrl())
                 .into(imageView);

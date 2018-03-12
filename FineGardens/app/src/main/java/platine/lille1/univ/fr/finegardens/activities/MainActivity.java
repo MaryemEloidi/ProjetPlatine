@@ -1,6 +1,7 @@
 package platine.lille1.univ.fr.finegardens.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import platine.lille1.univ.fr.finegardens.R;
 import platine.lille1.univ.fr.finegardens.fragments.AjouterJardinFragment;
 import platine.lille1.univ.fr.finegardens.fragments.ListeFavorisFragment;
+import platine.lille1.univ.fr.finegardens.fragments.ListeJardins;
 import platine.lille1.univ.fr.finegardens.fragments.MapFragment;
 
 import android.support.v4.app.Fragment;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.replace(R.id.flContent, fragment).commit();
 
             }
-        });*/
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -83,42 +85,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-//
-//        ListView mListview = (ListView)findViewById(R.id.listview_jardins_list);
-//        DatabaseReference mdatabase = FirebaseDatabase.getInstance().getReference().child("Jardins");
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mJardinsnames);
-//        mListview.setAdapter(arrayAdapter);
-//        mdatabase.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//               Jardin jardin = dataSnapshot.getValue(Jardin.class);
-//                String jardinvalue = String.valueOf(jardin);
-//
-//                mJardinsnames.add(jardinvalue);
-//                arrayAdapter.notifyDataSetChanged();
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+
     }
 
     @Override
@@ -169,6 +136,9 @@ public class MainActivity extends AppCompatActivity
 
             fragment = new AjouterJardinFragment();
 
+        }
+        else if(id == R.id.list_jardins){
+            fragment = new ListeJardins();
         }
         if(fragment!= null ){
             FragmentManager fragmentManager  = getSupportFragmentManager();

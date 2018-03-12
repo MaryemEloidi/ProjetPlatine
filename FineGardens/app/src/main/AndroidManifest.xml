@@ -38,8 +38,11 @@
         <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.DescriptionJardinActivity"></activity>
-        <activity android:name=".activities.CommentsActivity"></activity>
+        <activity android:name=".activities.DescriptionJardinActivity"
+            android:parentActivityName=".activities.MainActivity"></activity>
+        <activity android:name=".activities.CommentsActivity"
+            android:parentActivityName=".activities.DescriptionJardinActivity">
+        </activity>
     </application>
 
 </manifest>
