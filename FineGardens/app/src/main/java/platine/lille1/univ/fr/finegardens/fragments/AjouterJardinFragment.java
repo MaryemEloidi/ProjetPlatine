@@ -54,10 +54,13 @@ public class AjouterJardinFragment extends Fragment{
         LocationManager lm = (LocationManager)getActivity().getSystemService(LOCATION_SERVICE);
         if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if(location != null) {
+                longitude = location.getLongitude();
 
-             longitude = location.getLongitude();
-
-             latitude = location.getLatitude();
+                latitude = location.getLatitude();
+            }else {
+                Toast.makeText(getActivity(), "Vérfiez votre connection internet ", Toast.LENGTH_SHORT).show();
+            }
              mStorage = FirebaseStorage.getInstance().getReference();
 
         }
