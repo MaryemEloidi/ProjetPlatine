@@ -19,9 +19,14 @@ import android.view.*;
 import android.os.*;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -42,10 +47,13 @@ public class AjouterJardinFragment extends Fragment{
     private Button mBtnAjoutJardin;
     private Button mBtnUploadImage;
     private TextView mFileName;
+    private ImageView btnPlacePicker;
     String fileUrl;
     double longitude;
     double latitude;
     public StorageReference mStorage;
+    int PLACE_PICKER_REQUEST = 1;
+
 
 
     @Override
@@ -71,7 +79,7 @@ public class AjouterJardinFragment extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 2 && requestCode == RESULT_OK);
+        if(requestCode == 2 && requestCode == RESULT_OK){
         final Uri uri = data.getData();
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AppTheme_Custom_dialog);
@@ -103,6 +111,21 @@ public class AjouterJardinFragment extends Fragment{
                 });
             }
     },3000);
+        }if(requestCode == 1 && resultCode == RESULT_OK){
+            Log.d("on activity","");
+            final Place place = PlacePicker.getPlace(getActivity(), data);
+            final CharSequence name = place.getName();
+            final CharSequence address = place.getAddress();
+            String attributions = (String) place.getAttributions();
+            if (attributions == null) {
+                attributions = "";
+            }Log.d("adresse: ", (String) address);
+
+            //mName.setText(name);
+            mAdresseJardinView.setText(address);
+            // mAttributions.setText(Html.fromHtml(attributions));
+        }else
+            super.onActivityResult(requestCode, resultCode, data);
 
     }
 
@@ -122,6 +145,25 @@ public class AjouterJardinFragment extends Fragment{
                 intent.setType("image/*");
                 startActivityForResult(intent,2);
             }
+        });
+        btnPlacePicker = (ImageView) getView().findViewById(R.id.btn_adrese);
+        btnPlacePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                try {
+                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
         });
 
         mBtnAjoutJardin.setOnClickListener(new View.OnClickListener(){

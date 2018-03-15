@@ -209,16 +209,17 @@
             </ScrollView>
         </LinearLayout>
 
+
         <TextView
             android:id="@+id/commentLink"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
+            android:textColor="#666666"
             android:text="Afficher les avis "
-            android:textAppearance="@android:style/TextAppearance" />
-
+            android:padding="15dp"
+             />
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -1,8 +1,12 @@
 package platine.lille1.univ.fr.finegardens;
 
 import android.content.ComponentName;
+import android.content.Intent;
+import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -26,12 +30,23 @@ public class LoginActivityEspressoTest {
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule =
             new ActivityTestRule<>(LoginActivity.class);
-    @Test
+    @Before
+    public void setUp() throws Exception{
+        Intents.init();
+    }
+
+        @Test
     public void ensureLogin(){
         onView(withId(R.id.input_email)).perform(typeText("test@gmail.com"),closeSoftKeyboard());
         onView(withId(R.id.input_password)).perform(typeText("test12"),closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
+        mActivityRule.launchActivity(new Intent());
         intended(hasComponent(new ComponentName(getTargetContext(),MainActivity.class)));
+
+    }
+    @After
+    public void tearDown(){
+        Intents.release();
 
     }
 }
