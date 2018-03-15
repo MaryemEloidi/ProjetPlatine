@@ -49,8 +49,8 @@ public class AjouterJardinFragment extends Fragment{
     private TextView mFileName;
     private ImageView btnPlacePicker;
     String fileUrl;
-    double longitude;
-    double latitude;
+    double lng;
+    double lat;
     public StorageReference mStorage;
     int PLACE_PICKER_REQUEST = 1;
 
@@ -63,9 +63,9 @@ public class AjouterJardinFragment extends Fragment{
         if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(location != null) {
-                longitude = location.getLongitude();
+                lng = location.getLongitude();
 
-                latitude = location.getLatitude();
+                lat = location.getLatitude();
             }else {
                 Toast.makeText(getActivity(), "Vérfiez votre connection internet ", Toast.LENGTH_SHORT).show();
             }
@@ -116,6 +116,8 @@ public class AjouterJardinFragment extends Fragment{
             final Place place = PlacePicker.getPlace(getActivity(), data);
             final CharSequence name = place.getName();
             final CharSequence address = place.getAddress();
+            lat = place.getLatLng().latitude;
+            lng = place.getLatLng().longitude;
             String attributions = (String) place.getAttributions();
             if (attributions == null) {
                 attributions = "";
@@ -193,7 +195,7 @@ public class AjouterJardinFragment extends Fragment{
                 progressDialog.show();
                 new android.os.Handler().postDelayed(new Runnable() {
                     public void run() {
-                        JardinController.ajouterJardin(nomJardin,adresseJardin,descriptionJardin,longitude,latitude,fileUrl);
+                        JardinController.ajouterJardin(nomJardin,adresseJardin,descriptionJardin,lng,lat,fileUrl);
                         progressDialog.dismiss();
                         Toast.makeText(getContext(), "Le jardin a été bien ajouté !", Toast.LENGTH_LONG).show();
 
