@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,14 +34,15 @@ import platine.lille1.univ.fr.finegardens.entities.Jardin;
 import platine.lille1.univ.fr.finegardens.entities.Note;
 
 public class DescriptionJardinActivity extends AppCompatActivity {
-    private TextView commentslink;
+    private LinearLayout commentslink;
     private TextView jardin_nom;
     private TextView jardin_adresse;
     private TextView jardin_description;
     private RatingBar jarind_rating;
     private DatabaseReference mdatabase;
-    private Button itiniraire;
-    private Button commentBTN;
+    private LinearLayout itiniraire;
+    private LinearLayout commentBTN;
+    private LinearLayout likeLayout;
     private Button likeBTN;
     private ImageView imageJardin;
     private TextView ratingText;
@@ -64,7 +66,7 @@ public class DescriptionJardinActivity extends AppCompatActivity {
         noteAVGJardin();
         itiniraire = findViewById(R.id.markerBTN);
         commentBTN = findViewById(R.id.commentBTN);
-        likeBTN = findViewById(R.id.likeBTN);
+        likeLayout = findViewById(R.id.likeLayout);
         isJardinFavorite();
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Jardins");
         mdatabase.orderByChild("nom")
@@ -186,7 +188,8 @@ public class DescriptionJardinActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        likeBTN.setOnClickListener(new View.OnClickListener() {
+        likeBTN = findViewById(R.id.likeBTN);
+        likeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String currentUserID = FirebaseAuth.getInstance()
