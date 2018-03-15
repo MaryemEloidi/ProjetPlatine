@@ -209,7 +209,6 @@
             </ScrollView>
         </LinearLayout>
 
-
         <TextView
             android:id="@+id/commentLink"
             android:layout_width="match_parent"
