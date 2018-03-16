@@ -35,11 +35,6 @@ import com.google.firebase.storage.UploadTask;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.LOCATION_SERVICE;
 
-
-/**
- * Created by cactus on 16/02/2018.
- */
-
 public class AjouterJardinFragment extends Fragment{
     private EditText mNomJardinView;
     private EditText mAdresseJardinView;
@@ -48,11 +43,11 @@ public class AjouterJardinFragment extends Fragment{
     private Button mBtnUploadImage;
     private TextView mFileName;
     private ImageView btnPlacePicker;
-    String fileUrl;
-    double lng;
-    double lat;
-    public StorageReference mStorage;
-    int PLACE_PICKER_REQUEST = 1;
+    private String fileUrl;
+    private double lng;
+    private double lat;
+    private  StorageReference mStorage;
+    private int PLACE_PICKER_REQUEST = 1;
 
 
 
@@ -79,7 +74,7 @@ public class AjouterJardinFragment extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 2 && requestCode == RESULT_OK){
+        if(requestCode == 2 && resultCode == RESULT_OK){
         final Uri uri = data.getData();
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
                 R.style.AppTheme_Custom_dialog);
@@ -158,9 +153,9 @@ public class AjouterJardinFragment extends Fragment{
                 try {
                     startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
                 } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
+                    Log.e("error : ", e.getMessage());
                 } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
+                    Log.e("error", e.getMessage());
                 }
 
 

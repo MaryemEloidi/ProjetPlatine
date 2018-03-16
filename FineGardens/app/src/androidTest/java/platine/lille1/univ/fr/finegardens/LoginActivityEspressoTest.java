@@ -33,12 +33,6 @@ public class LoginActivityEspressoTest {
         Intents.init();
     }
 
-    @After
-    public void tearDown(){
-        Intents.release();
-
-    }
-
     @Test
     public void ensureLogin(){
         onView(withId(R.id.input_email)).perform(typeText("test@gmail.com"),closeSoftKeyboard());
@@ -57,5 +51,10 @@ public class LoginActivityEspressoTest {
         mActivityRule.launchActivity(new Intent());
 
         intended(hasComponent(new ComponentName(getTargetContext(), SignUpActivity.class)));
+    }
+
+    @After
+    public void tearDown(){
+        Intents.release();
     }
 }

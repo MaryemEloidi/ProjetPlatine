@@ -1,41 +1,19 @@
 package platine.lille1.univ.fr.finegardens.entities;
 
-/**
- * Created by cactus on 21/01/2018.
- */
-
 public class Jardin {
-    public String id;
-    public String nom;
-    public String adresse;
-    public String description;
-    public double latitude;
-    public double longitude;
-    public String horaire_ouverture;
-    public String horaire_fermeture;
-    public float note;
-    public String imageUrl;
+    private String id;
+    private String nom;
+    private String adresse;
+    private String description;
+    private double latitude;
+    private double longitude;
+    private String horaire_ouverture;
+    private String horaire_fermeture;
+    private float note;
+    private String imageUrl;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public Jardin(){}
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getId() {
-
-        return id;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public Jardin(){
-
-    }
     public Jardin(String id, String nom, String adresse, String description, double longitude, double latitude, String imageUrl){
         this.id=id;
         this.nom = nom;
@@ -108,6 +86,22 @@ public class Jardin {
 
     public void setNote(float note) {
         this.note = note;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

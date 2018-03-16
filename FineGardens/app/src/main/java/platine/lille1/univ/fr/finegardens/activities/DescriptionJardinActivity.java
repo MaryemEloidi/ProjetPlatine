@@ -127,7 +127,6 @@ public class DescriptionJardinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String adresseItiniraire = jardin_adresse.getText().toString();
-                adresseItiniraire.replaceAll(" ","+");
 
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                         Uri.parse("google.navigation:q="+jardinNom.replaceAll(" ","+")+","+adresseItiniraire));
