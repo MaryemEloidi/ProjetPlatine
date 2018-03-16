@@ -37,6 +37,8 @@ allprojects {
             property "sonar.sources", "src/main"
         }
     }
+
+
 }
 
 task clean(type: Delete) {

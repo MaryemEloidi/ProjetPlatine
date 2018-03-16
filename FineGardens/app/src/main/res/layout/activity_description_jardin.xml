@@ -91,7 +91,8 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <LinearLayout android:id="@+id/commentBTN"
+                <LinearLayout
+                    android:id="@+id/commentBTN"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -119,14 +120,16 @@
                     android:layout_height="match_parent"
                     android:background="#f1f1f1"/>
 
-                <LinearLayout android:id="@+id/likeLayout"
+                <LinearLayout
+                    android:id="@+id/likeLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <Button android:id="@+id/likeBTN"
+                    <Button
+                        android:id="@+id/likeBTN"
                         android:layout_width="36dp"
                         android:layout_height="33dp"
                         android:background="@drawable/heart_icon"
@@ -207,27 +210,27 @@
             </ScrollView>
         </LinearLayout>
 
-        <LinearLayout android:id="@+id/commentLink"
+        <LinearLayout
+            android:id="@+id/commentLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:padding="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="15dp">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/icons8_menu_48"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icons8_menu_48" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#666666"
-                android:textSize="20sp"
                 android:text="Afficher les avis "
-                />
+                android:textColor="#666666"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
     </ScrollView>
